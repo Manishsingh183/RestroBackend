@@ -3,6 +3,8 @@ const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const socketIo = require("socket.io");
+const http = require("http");
 
 app.use(cors());
 require("dotenv").config();
@@ -11,6 +13,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const port = 8080;
 const database_URL = process.env.database_URL;
+
+const server = http.createServer(app);
+const io = socketIo(server);
 
 // Connecting through the database
 // LammaRestro here is database name
@@ -76,6 +81,20 @@ const menuSchema = new mongoose.Schema({
   subCategory: { type: String, required: true },
 });
 
+const locationSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  phone: { type: Number, required: true },
+  locationName: { type: String, required: true },
+  dateTime: { type: Date, required: true },
+  coordinate: {
+    type: { type: String, enum: ["Point"], required: true },
+    coordinate: { type: [Number], required: true },
+  },
+  assignedTo: { type: String, required: true },
+  status: { type: String, required: true },
+  paymentMode: { type: String, required: true },
+});
+
 const MailingModel = new mongoose.model("Mailing", mailingSchema);
 // Now create a collection for this schema where all your data will be stored
 const contactUsEntry = new mongoose.model("Contact", contactSchema);
@@ -83,6 +102,8 @@ const contactUsEntry = new mongoose.model("Contact", contactSchema);
 const reservationModel = new mongoose.model("Reservations", reservationSchema);
 
 const menuModel = new mongoose.model("MenuDesc", menuSchema);
+
+const locationModel = new mongoose.model("locationDict", locationSchema);
 ////////////  Now we need to use Multer to store and save image
 // here upload.single(<image_name>) bcoz we are storing only single image at a time.
 app.post("/adminMenu", upload.single("image"), async (req, res) => {
@@ -100,6 +121,37 @@ app.post("/adminMenu", upload.single("image"), async (req, res) => {
   menuItem.save();
 
   res.send("Uploaded!!");
+});
+
+app.post("/location", (req, res) => {
+  const { name, phone, locationName, dateTime, latitude, longitude } = req.body;
+  const locationData = new locationModel({
+    name: name,
+    phone: phone,
+    locationName: locationName,
+    dateTime: dateTime,
+    coordinate: {
+      type: "Point",
+      coordinate: [latitude, longitude],
+    },
+    assignedTo: "Shashwat",
+    status: "Active",
+    paymentMode: "Cash",
+  });
+  locationData.save();
+  res.send("Address Updated");
+  console.log(req.body);
+});
+
+app.get("/adminServicePortal", async (req, res) => {
+  try {
+    const allValues = await locationModel.find();
+    io.emit("dataUpdated", allValues);
+    res.json(allValues);
+  } catch (error) {
+    console.error("Error fetching data", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 app.get("/adminMenu", async (req, res) => {
@@ -207,6 +259,15 @@ app.get("/mailing", async (req, res) => {
     console.error("Error fetching data:", error);
     res.status(500).json({ error: "Internal server error" });
   }
+});
+
+io.on("connection", (socket) => {
+  console.log("A client connected");
+
+  // Handle disconnection
+  socket.on("disconnect", () => {
+    console.log("A client disconnected");
+  });
 });
 
 app.listen(process.env.PORT || port, (req, res) => {
