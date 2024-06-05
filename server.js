@@ -6,8 +6,15 @@ const mongoose = require("mongoose");
 const socketIo = require("socket.io");
 const http = require("http");
 
-app.use(cors());
+// app.use(cors());
 require("dotenv").config();
+
+const corsOptions = {
+  origin: "http://localhost:3000", // Your frontend URL
+  optionsSuccessStatus: 200, // For legacy browser support
+};
+
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
