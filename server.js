@@ -10,7 +10,10 @@ const http = require("http");
 require("dotenv").config();
 
 const corsOptions = {
-  origin: "http://localhost:3000", // Your frontend URL
+  origin: [
+    "http://localhost:3000",
+    "https://master--restroproject.netlify.app/",
+  ], // Your frontend URL
   optionsSuccessStatus: 200, // For legacy browser support
 };
 
