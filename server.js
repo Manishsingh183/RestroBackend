@@ -83,9 +83,9 @@ mongoose
   });
 
 // Catch-all handler to serve the React app for any route not handled by the server
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "build", "index.html"));
+// });
 
 const multer = require("multer");
 const { all } = require("axios");
