@@ -27,14 +27,19 @@ const corsOptions = {
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
+
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", [
+  const allowedOrigins = [
     "https://restroproject.netlify.app",
     "https://master--restroproject.netlify.app",
-  ]);
+  ];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
+    "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS"
   );
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -42,11 +47,12 @@ app.use((req, res, next) => {
   );
   res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader("Access-Control-Allow-Private-Network", true);
-  //  Firefox caps this at 24 hours (86400 seconds). Chromium (starting in v76) caps at 2 hours (7200 seconds). The default value is 5 seconds.
   res.setHeader("Access-Control-Max-Age", 7200);
 
   next();
 });
+
+app.use(cors(corsOptions));
 
 app.use(cors(corsOptions));
 
