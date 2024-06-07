@@ -9,17 +9,56 @@ const http = require("http");
 // app.use(cors());
 require("dotenv").config();
 
+// const corsOptions = {
+//   origin: [
+//     "http://localhost:3000",
+//     "https://master--restroproject.netlify.app/",
+//   ], // Your frontend URL
+//   optionsSuccessStatus: 200, // For legacy browser support
+// };
+
 const corsOptions = {
-  origin: ["http://localhost:3000", "https://restroproject.netlify.app/"], // Add your frontend URL
+  origin: [
+    "http://localhost:3000",
+    "https://restroproject.netlify.app",
+    "https://master--restroproject.netlify.app",
+  ],
   optionsSuccessStatus: 200, // For legacy browser support
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 
+app.use((req, res, next) => {
+  const allowedOrigins = [
+    "https://restroproject.netlify.app",
+    "https://master--restroproject.netlify.app",
+  ];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Private-Network", true);
+  res.setHeader("Access-Control-Max-Age", 7200);
+
+  next();
+});
+
+app.use(cors(corsOptions));
+
 app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 const port = 8080;
 const database_URL = process.env.database_URL;
 
@@ -182,6 +221,10 @@ app.get("/adminMenu", async (req, res) => {
     console.log(error);
     res.status(500).json({ error: "Internal Server Error!" });
   }
+});
+
+app.get("/", (req, res) => {
+  res.send("Hello There!!");
 });
 
 app.get("/menu", async (req, res) => {
