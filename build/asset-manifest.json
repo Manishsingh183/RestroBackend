@@ -1,0 +1,42 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c5c2a345.css",
+    "main.js": "/static/js/main.cd6d0d68.js",
+    "static/js/787.556d0df2.chunk.js": "/static/js/787.556d0df2.chunk.js",
+    "static/media/speciality3.png": "/static/media/speciality3.1acc16777537b453808f.png",
+    "static/media/speciality2.png": "/static/media/speciality2.14f322d693504c187a79.png",
+    "static/media/speciality1.png": "/static/media/speciality1.ad75659a3123163f272a.png",
+    "static/media/speciality4.png": "/static/media/speciality4.ca2529843640a55a9224.png",
+    "static/media/chef2.png": "/static/media/chef2.e3b89bb1a745acd5be68.png",
+    "static/media/history4.png": "/static/media/history4.6c694afc8bdbf1f739d2.png",
+    "static/media/history2.png": "/static/media/history2.37a79c65f8393a1a65fb.png",
+    "static/media/chef4.png": "/static/media/chef4.cd78ac52c1ddaef827d6.png",
+    "static/media/chef3.png": "/static/media/chef3.5a68d78c053b28f97bdf.png",
+    "static/media/chef1.png": "/static/media/chef1.ccd1d77c867adeb010e5.png",
+    "static/media/contact1.png": "/static/media/contact1.859a4da0f6022bf36b5e.png",
+    "static/media/history3.png": "/static/media/history3.c326113b42fe7fa7992a.png",
+    "static/media/history1.png": "/static/media/history1.99b11e14661296aa475f.png",
+    "static/media/gallery3.png": "/static/media/gallery3.225e78f38d3c356562e4.png",
+    "static/media/gallery4.png": "/static/media/gallery4.deee35df950d9f710960.png",
+    "static/media/gallery1.png": "/static/media/gallery1.b6d5134276e8189192f9.png",
+    "static/media/gallery2.png": "/static/media/gallery2.f993f6aa883ec7bcb15e.png",
+    "static/media/ResrvSec2.png": "/static/media/ResrvSec2.0cc209139656e34b847f.png",
+    "static/media/ResrvSec1.png": "/static/media/ResrvSec1.c1be0e24a2d6bdb2e3a1.png",
+    "static/media/ResrvGal3.png": "/static/media/ResrvGal3.9064d29e1904608f6a90.png",
+    "static/media/ResrvGal2.png": "/static/media/ResrvGal2.cedd8d50245816510f3a.png",
+    "static/media/ResrvGal4.png": "/static/media/ResrvGal4.34acd3a304567a76f61b.png",
+    "static/media/ResrvSec3.png": "/static/media/ResrvSec3.c1000fd5bf884fbfa73d.png",
+    "static/media/HotelLogo.png": "/static/media/HotelLogo.774afdc763c6d6dd9d6e.png",
+    "static/media/ResrvGal1.png": "/static/media/ResrvGal1.5c95384c437a0bb366aa.png",
+    "static/media/delivery2.png": "/static/media/delivery2.aee6005c4f8577299178.png",
+    "static/media/delivery1.png": "/static/media/delivery1.0b819ebe3c660e61b609.png",
+    "index.html": "/index.html",
+    "main.c5c2a345.css.map": "/static/css/main.c5c2a345.css.map",
+    "main.cd6d0d68.js.map": "/static/js/main.cd6d0d68.js.map",
+    "787.556d0df2.chunk.js.map": "/static/js/787.556d0df2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c5c2a345.css",
+    "static/js/main.cd6d0d68.js"
+  ]
+}

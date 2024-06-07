@@ -59,11 +59,16 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.static(path.join(__dirname, "build")));
+
 const port = 8080;
 const database_URL = process.env.database_URL;
 
 const server = http.createServer(app);
 const io = socketIo(server);
+
+// Serve static files from the React app's build directory
+app.use(express.static(path.join(__dirname, "build")));
 
 // Connecting through the database
 // LammaRestro here is database name
@@ -75,6 +80,11 @@ mongoose
   .catch((error) => {
     console.error("Error while connecting to database", error);
   });
+
+// Catch-all handler to serve the React app for any route not handled by the server
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 const multer = require("multer");
 const { all } = require("axios");
