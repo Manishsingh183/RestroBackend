@@ -22,7 +22,7 @@ const corsOptions = {
   origin: [
     "http://localhost:3000",
     "https://restroproject.netlify.app",
-    "https://master--restroproject.netlify.app",
+    "https://master-restroproject.netlify.app/",
   ],
   optionsSuccessStatus: 200, // For legacy browser support
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
