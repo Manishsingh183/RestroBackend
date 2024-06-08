@@ -32,7 +32,7 @@ const corsOptions = {
 app.use((req, res, next) => {
   const allowedOrigins = [
     "https://restroproject.netlify.app",
-    "https://master--restroproject.netlify.app",
+    "https://master-restroproject.netlify.app",
   ];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
